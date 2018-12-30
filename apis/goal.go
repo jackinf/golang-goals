@@ -9,33 +9,33 @@ import (
 )
 
 type (
-	// artistService specifies the interface for the artist service needed by artistResource.
-	artistService interface {
-		Get(rs app.RequestScope, id int) (*models.Artist, error)
-		Query(rs app.RequestScope, offset, limit int) ([]models.Artist, error)
+	// goalService specifies the interface for the goal service needed by goalResource.
+	goalService interface {
+		Get(rs app.RequestScope, id int) (*models.Goal, error)
+		Query(rs app.RequestScope, offset, limit int) ([]models.Goal, error)
 		Count(rs app.RequestScope) (int, error)
-		Create(rs app.RequestScope, model *models.Artist) (*models.Artist, error)
-		Update(rs app.RequestScope, id int, model *models.Artist) (*models.Artist, error)
-		Delete(rs app.RequestScope, id int) (*models.Artist, error)
+		Create(rs app.RequestScope, model *models.Goal) (*models.Goal, error)
+		Update(rs app.RequestScope, id int, model *models.Goal) (*models.Goal, error)
+		Delete(rs app.RequestScope, id int) (*models.Goal, error)
 	}
 
-	// artistResource defines the handlers for the CRUD APIs.
-	artistResource struct {
-		service artistService
+	// goalResource defines the handlers for the CRUD APIs.
+	goalResource struct {
+		service goalService
 	}
 )
 
-// ServeArtist sets up the routing of artist endpoints and the corresponding handlers.
-func ServeArtistResource(rg *routing.RouteGroup, service artistService) {
-	r := &artistResource{service}
-	rg.Get("/artists/<id>", r.get)
-	rg.Get("/artists", r.query)
-	rg.Post("/artists", r.create)
-	rg.Put("/artists/<id>", r.update)
-	rg.Delete("/artists/<id>", r.delete)
+// ServeGoal sets up the routing of goal endpoints and the corresponding handlers.
+func ServeGoalResource(rg *routing.RouteGroup, service goalService) {
+	r := &goalResource{service}
+	rg.Get("/goals/<id>", r.get)
+	rg.Get("/goals", r.query)
+	rg.Post("/goals", r.create)
+	rg.Put("/goals/<id>", r.update)
+	rg.Delete("/goals/<id>", r.delete)
 }
 
-func (r *artistResource) get(c *routing.Context) error {
+func (r *goalResource) get(c *routing.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		return err
@@ -49,7 +49,7 @@ func (r *artistResource) get(c *routing.Context) error {
 	return c.Write(response)
 }
 
-func (r *artistResource) query(c *routing.Context) error {
+func (r *goalResource) query(c *routing.Context) error {
 	rs := app.GetRequestScope(c)
 	count, err := r.service.Count(rs)
 	if err != nil {
@@ -64,8 +64,8 @@ func (r *artistResource) query(c *routing.Context) error {
 	return c.Write(paginatedList)
 }
 
-func (r *artistResource) create(c *routing.Context) error {
-	var model models.Artist
+func (r *goalResource) create(c *routing.Context) error {
+	var model models.Goal
 	if err := c.Read(&model); err != nil {
 		return err
 	}
@@ -77,7 +77,7 @@ func (r *artistResource) create(c *routing.Context) error {
 	return c.Write(response)
 }
 
-func (r *artistResource) update(c *routing.Context) error {
+func (r *goalResource) update(c *routing.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		return err
@@ -102,7 +102,7 @@ func (r *artistResource) update(c *routing.Context) error {
 	return c.Write(response)
 }
 
-func (r *artistResource) delete(c *routing.Context) error {
+func (r *goalResource) delete(c *routing.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		return err

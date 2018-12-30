@@ -3,23 +3,23 @@ package daos
 import (
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"golang-restful-starter-kit/app"
 	"golang-restful-starter-kit/models"
 	"golang-restful-starter-kit/testdata"
-	"github.com/stretchr/testify/assert"
 )
 
-func TestArtistDAO(t *testing.T) {
+func TestGoalDAO(t *testing.T) {
 	db := testdata.ResetDB()
-	dao := NewArtistDAO()
+	dao := NewGoalDAO()
 
 	{
 		// Get
 		testDBCall(db, func(rs app.RequestScope) {
-			artist, err := dao.Get(rs, 2)
+			goal, err := dao.Get(rs, 2)
 			assert.Nil(t, err)
-			if assert.NotNil(t, artist) {
-				assert.Equal(t, 2, artist.Id)
+			if assert.NotNil(t, goal) {
+				assert.Equal(t, 2, goal.Id)
 			}
 		})
 	}
@@ -27,25 +27,25 @@ func TestArtistDAO(t *testing.T) {
 	{
 		// Create
 		testDBCall(db, func(rs app.RequestScope) {
-			artist := &models.Artist{
+			goal := &models.Goal{
 				Id:   1000,
 				Name: "tester",
 			}
-			err := dao.Create(rs, artist)
+			err := dao.Create(rs, goal)
 			assert.Nil(t, err)
-			assert.NotEqual(t, 1000, artist.Id)
-			assert.NotZero(t, artist.Id)
+			assert.NotEqual(t, 1000, goal.Id)
+			assert.NotZero(t, goal.Id)
 		})
 	}
 
 	{
 		// Update
 		testDBCall(db, func(rs app.RequestScope) {
-			artist := &models.Artist{
+			goal := &models.Goal{
 				Id:   2,
 				Name: "tester",
 			}
-			err := dao.Update(rs, artist.Id, artist)
+			err := dao.Update(rs, goal.Id, goal)
 			assert.Nil(t, err)
 		})
 	}
@@ -53,11 +53,11 @@ func TestArtistDAO(t *testing.T) {
 	{
 		// Update with error
 		testDBCall(db, func(rs app.RequestScope) {
-			artist := &models.Artist{
+			goal := &models.Goal{
 				Id:   2,
 				Name: "tester",
 			}
-			err := dao.Update(rs, 99999, artist)
+			err := dao.Update(rs, 99999, goal)
 			assert.NotNil(t, err)
 		})
 	}
@@ -81,9 +81,9 @@ func TestArtistDAO(t *testing.T) {
 	{
 		// Query
 		testDBCall(db, func(rs app.RequestScope) {
-			artists, err := dao.Query(rs, 1, 3)
+			goals, err := dao.Query(rs, 1, 3)
 			assert.Nil(t, err)
-			assert.Equal(t, 3, len(artists))
+			assert.Equal(t, 3, len(goals))
 		})
 	}
 
