@@ -52,7 +52,7 @@ func buildRouter(logger *logrus.Logger, db *dbx.DB) *routing.Router {
 	router := routing.New()
 
 	router.To("GET,HEAD", "/ping", func(c *routing.Context) error {
-		c.Abort()  // skip all other middlewares/handlers
+		c.Abort() // skip all other middlewares/handlers
 		return c.Write("OK " + app.Version)
 	})
 
@@ -80,6 +80,9 @@ func buildRouter(logger *logrus.Logger, db *dbx.DB) *routing.Router {
 
 	albumDAO := daos.NewAlbumDAO()
 	apis.ServeAlbumResource(rg, services.NewAlbumService(albumDAO))
+
+	goalDao := daos.NewGoalDAO()
+	apis.ServeGoalResource(rg, services.NewGoalService(goalDao))
 
 	// wire up more resource APIs here
 
