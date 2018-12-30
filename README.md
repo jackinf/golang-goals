@@ -1,5 +1,10 @@
 # Go RESTful Application Starter Kit
 
+## Description
+
+This application is created only for learning purposes.
+This is backend-only (REST API). Frontend is here - https://github.com/jackinf/cra-goals.
+
 [![GoDoc](https://godoc.org/golang-restful-starter-kit?status.png)](http://godoc.org/golang-restful-starter-kit)
 [![Build Status](https://travis-ci.org/qiangxue/golang-restful-starter-kit.svg?branch=master)](https://travis-ci.org/qiangxue/golang-restful-starter-kit)
 [![Coverage Status](https://coveralls.io/repos/github/qiangxue/golang-restful-starter-kit/badge.svg?branch=master)](https://coveralls.io/github/qiangxue/golang-restful-starter-kit?branch=master)
