@@ -1,8 +1,8 @@
 package daos
 
 import (
-	"golang-restful-starter-kit/app"
-	"golang-restful-starter-kit/models"
+	"github.com/jackinf/golang-goals/app"
+	"github.com/jackinf/golang-goals/models"
 )
 
 // GoalDAO persists goal data in database

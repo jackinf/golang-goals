@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/go-ozzo/ozzo-dbx"
-	"golang-restful-starter-kit/app"
+	"github.com/jackinf/golang-goals/app"
 )
 
 func testDBCall(db *dbx.DB, f func(rs app.RequestScope)) {

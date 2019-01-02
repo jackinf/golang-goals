@@ -8,10 +8,10 @@ import (
 // Goal represents an goal record.
 type Goal struct {
 	Id          int       `json:"id" db:"id"`
-	Title       string    `json:"name" db:"title"`
-	Description string    `json:"name" db:"description"`
-	Due         time.Time `json:"name" db:"due"`
-	Motivation  string    `json:"name" db:"motivation"`
+	Title       string    `json:"title" db:"title"`
+	Description string    `json:"description" db:"description"`
+	Due         time.Time `json:"due" db:"due"`
+	Motivation  string    `json:"motivation" db:"motivation"`
 }
 
 // Validate validates the Goal fields.

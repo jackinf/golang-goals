@@ -1,11 +1,11 @@
 package apis
 
 import (
-	"golang-restful-starter-kit/models"
+	"github.com/jackinf/golang-goals/app"
+	"github.com/jackinf/golang-goals/models"
 	"strconv"
 
 	"github.com/go-ozzo/ozzo-routing"
-	"golang-restful-starter-kit/app"
 )
 
 type (

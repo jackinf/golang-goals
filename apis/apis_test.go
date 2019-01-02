@@ -9,8 +9,8 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/go-ozzo/ozzo-routing"
 	"github.com/go-ozzo/ozzo-routing/content"
-	"golang-restful-starter-kit/app"
-	"golang-restful-starter-kit/testdata"
+	"github.com/jackinf/golang-goals/app"
+	"github.com/jackinf/golang-goals/testdata"
 	"github.com/stretchr/testify/assert"
 )
 

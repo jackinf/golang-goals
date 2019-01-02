@@ -4,9 +4,9 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"golang-restful-starter-kit/app"
-	"golang-restful-starter-kit/models"
-	"golang-restful-starter-kit/testdata"
+	"github.com/jackinf/golang-goals/app"
+	"github.com/jackinf/golang-goals/models"
+	"github.com/jackinf/golang-goals/testdata"
 )
 
 func TestGoalDAO(t *testing.T) {

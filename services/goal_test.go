@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"golang-restful-starter-kit/app"
-	"golang-restful-starter-kit/models"
+	"github.com/jackinf/golang-goals/app"
+	"github.com/jackinf/golang-goals/models"
 )
 
 func TestNewGoalService(t *testing.T) {

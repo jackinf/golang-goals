@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"testing"
 
-	"golang-restful-starter-kit/daos"
-	"golang-restful-starter-kit/services"
-	"golang-restful-starter-kit/testdata"
+	"github.com/jackinf/golang-goals/daos"
+	"github.com/jackinf/golang-goals/services"
+	"github.com/jackinf/golang-goals/testdata"
 )
 
 func TestGoal(t *testing.T) {

@@ -3,7 +3,7 @@ package app
 import (
 	"database/sql"
 	"fmt"
-	"golang-restful-starter-kit/errors"
+	"github.com/jackinf/golang-goals/errors"
 	"net/http"
 	"time"
 

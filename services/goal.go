@@ -1,8 +1,8 @@
 package services
 
 import (
-	"golang-restful-starter-kit/app"
-	"golang-restful-starter-kit/models"
+	"github.com/jackinf/golang-goals/app"
+	"github.com/jackinf/golang-goals/models"
 )
 
 // goalDAO specifies the interface of the goal DAO needed by GoalService.
