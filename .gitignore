@@ -30,3 +30,6 @@ coverage-all.out
 server
 
 # vendor
+
+# scripts
+local-run.*

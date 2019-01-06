@@ -1,0 +1,2 @@
+docker build -t stylehopper/golang-goals .
+docker run -p 8080:8080 -e RESTFUL_DSN=$env:RESTFUL_DSN -e RESTFUL_JWT_VERIFICATION_KEY=$env:RESTFUL_JWT_VERIFICATION_KEY -e RESTFUL_JWT_SIGNING_KEY=$env:RESTFUL_JWT_SIGNING_KEY stylehopper/golang-goals:latest
