@@ -30,6 +30,10 @@ coverage-all.out
 server
 
 # vendor
+vendor
 
 # scripts
 local-run.*
+
+# Secret keys
+secrets
