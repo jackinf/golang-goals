@@ -3,6 +3,7 @@ FROM golang
 ENV RESTFUL_DSN "postgres://postgres:docker@127.0.0.1:5432/go_restful?sslmode=disable"
 ENV RESTFUL_JWT_VERIFICATION_KEY "QfCAH04Cob7b71QCqy738vw5XGSnFZ9d"
 ENV RESTFUL_JWT_SIGNING_KEY "QfCAH04Cob7b71QCqy738vw5XGSnFZ9d"
+ENV RESTFUL_FIREBASE_CREDENTIALS_JSON ""
 ADD . /go/src/github.com/jackinf/golang-goals
 WORKDIR /go/src/github.com/jackinf/golang-goals
 RUN curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh

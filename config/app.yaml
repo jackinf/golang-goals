@@ -12,3 +12,5 @@ jwt_signing_key: RESTFUL_JWT_SIGNING_KEY
 # Uncomment the following line and set an appropriate JWT signing method, if needed
 # The default signing method is HS256.
 #jwt_signing_method: "HS256"
+
+firebase_credentials_json: RESTFUL_FIREBASE_CREDENTIALS_JSON

@@ -40,7 +40,7 @@ func main() {
 	db.LogFunc = logger.Infof
 
 	// firebase app
-	firebaseApp := CreateFirebaseApp()
+	firebaseApp := CreateFirebaseApp(app.Config.FirebaseCredentialsJson)
 
 	// wire up API routing
 	http.Handle("/", buildRouter(logger, db, firebaseApp))
