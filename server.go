@@ -4,18 +4,18 @@ import (
 	"fmt"
 	"net/http"
 
+	"firebase.google.com/go"
 	"github.com/Sirupsen/logrus"
 	"github.com/go-ozzo/ozzo-dbx"
 	"github.com/go-ozzo/ozzo-routing"
-	"github.com/go-ozzo/ozzo-routing/auth"
 	"github.com/go-ozzo/ozzo-routing/content"
 	"github.com/go-ozzo/ozzo-routing/cors"
-	_ "github.com/lib/pq"
 	"github.com/jackinf/golang-goals/apis"
 	"github.com/jackinf/golang-goals/app"
 	"github.com/jackinf/golang-goals/daos"
 	"github.com/jackinf/golang-goals/errors"
 	"github.com/jackinf/golang-goals/services"
+	_ "github.com/lib/pq"
 )
 
 func main() {
@@ -39,8 +39,11 @@ func main() {
 	}
 	db.LogFunc = logger.Infof
 
+	// firebase app
+	firebaseApp := CreateFirebaseApp()
+
 	// wire up API routing
-	http.Handle("/", buildRouter(logger, db))
+	http.Handle("/", buildRouter(logger, db, firebaseApp))
 
 	// start the server
 	address := fmt.Sprintf(":%v", app.Config.ServerPort)
@@ -48,7 +51,7 @@ func main() {
 	panic(http.ListenAndServe(address, nil))
 }
 
-func buildRouter(logger *logrus.Logger, db *dbx.DB) *routing.Router {
+func buildRouter(logger *logrus.Logger, db *dbx.DB, firebaseApp *firebase.App) *routing.Router {
 	router := routing.New()
 
 	router.To("GET,HEAD", "/ping", func(c *routing.Context) error {
@@ -69,11 +72,7 @@ func buildRouter(logger *logrus.Logger, db *dbx.DB) *routing.Router {
 
 	rg := router.Group("/v1")
 
-	rg.Post("/auth", apis.Auth(app.Config.JWTSigningKey))
-	rg.Use(auth.JWT(app.Config.JWTVerificationKey, auth.JWTOptions{
-		SigningMethod: app.Config.JWTSigningMethod,
-		TokenHandler:  apis.JWTHandler,
-	}))
+	rg.Use(apis.FirebaseAuth(firebaseApp))
 
 	goalDao := daos.NewGoalDAO()
 	apis.ServeGoalResource(rg, services.NewGoalService(goalDao))
