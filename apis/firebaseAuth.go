@@ -29,6 +29,7 @@ func FirebaseAuth(app *firebase.App) routing.Handler {
 			return routing.NewHTTPError(http.StatusUnauthorized, "Unauthorized")
 		}
 
+		ctx.Request.Header.Add("user_id", token.Claims["user_id"].(string))
 		log.Printf("Verified ID token: %v\n", token)
 		return nil
 	}

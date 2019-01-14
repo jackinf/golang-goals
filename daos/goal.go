@@ -1,6 +1,7 @@
 package daos
 
 import (
+	"github.com/go-ozzo/ozzo-dbx"
 	"github.com/jackinf/golang-goals/app"
 	"github.com/jackinf/golang-goals/models"
 )
@@ -16,7 +17,11 @@ func NewGoalDAO() *GoalDAO {
 // Get reads the goal with the specified ID from the database.
 func (dao *GoalDAO) Get(rs app.RequestScope, id int) (*models.Goal, error) {
 	var goal models.Goal
-	err := rs.Tx().Select().Model(id, &goal)
+	err := rs.
+		Tx().
+		Select().
+		Where(dbx.HashExp{"user_id": rs.UserID()}).
+		Model(id, &goal)
 	return &goal, err
 }
 
@@ -24,6 +29,7 @@ func (dao *GoalDAO) Get(rs app.RequestScope, id int) (*models.Goal, error) {
 // The Goal.Id field will be populated with an automatically generated ID upon successful saving.
 func (dao *GoalDAO) Create(rs app.RequestScope, goal *models.Goal) error {
 	goal.Id = 0
+	goal.UserId = rs.UserID()
 	return rs.Tx().Model(goal).Insert()
 }
 
@@ -48,13 +54,23 @@ func (dao *GoalDAO) Delete(rs app.RequestScope, id int) error {
 // Count returns the number of the goal records in the database.
 func (dao *GoalDAO) Count(rs app.RequestScope) (int, error) {
 	var count int
-	err := rs.Tx().Select("COUNT(*)").From("goal").Row(&count)
+	err := rs.Tx().
+		Select("COUNT(*)").
+		Where(dbx.HashExp{"user_id": rs.UserID()}).
+		From("goal").
+		Row(&count)
 	return count, err
 }
 
 // Query retrieves the goal records with the specified offset and limit from the database.
 func (dao *GoalDAO) Query(rs app.RequestScope, offset, limit int) ([]models.Goal, error) {
-	goals := []models.Goal{}
-	err := rs.Tx().Select().OrderBy("id").Offset(int64(offset)).Limit(int64(limit)).All(&goals)
+	var goals []models.Goal
+	err := rs.Tx().
+		Select().
+		Where(dbx.HashExp{"user_id": rs.UserID()}).
+		OrderBy("id").
+		Offset(int64(offset)).
+		Limit(int64(limit)).
+		All(&goals)
 	return goals, err
 }
