@@ -10,5 +10,5 @@ jobs:
     steps:
       - checkout
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
-      - run: docker build -t stylehopper/golang-goals:$CIRCLE_BRANCH .
-      - run: docker push stylehopper/golang-goals:$CIRCLE_BRANCH
+      - run: docker build -t stylehopper/golang-goals:$CIRCLE_BUILD_NUM .
+      - run: docker push stylehopper/golang-goals:$CIRCLE_BUILD_NUM
