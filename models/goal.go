@@ -12,6 +12,7 @@ type Goal struct {
 	Description string    `json:"description" db:"description"`
 	Due         time.Time `json:"due" db:"due"`
 	Motivation  string    `json:"motivation" db:"motivation"`
+	UserId      string    `json:"user_id" db:"user_id"`
 }
 
 // Validate validates the Goal fields.

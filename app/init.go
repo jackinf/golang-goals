@@ -35,7 +35,12 @@ func Init(logger *logrus.Logger) routing.Handler {
 
 // GetRequestScope returns the RequestScope of the current request.
 func GetRequestScope(c *routing.Context) RequestScope {
-	return c.Get("Context").(RequestScope)
+	rs := c.Get("Context").(RequestScope)
+	userId := c.Request.Header.Get("user_id")
+	if userId != "" {
+		rs.SetUserID(c.Request.Header.Get("user_id"))
+	}
+	return rs
 }
 
 // logAccess logs a message describing the current request.
